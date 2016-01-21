@@ -1,0 +1,69 @@
+1. Client Table:
+CREATE TABLE `client` (
+  `client_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  `fname` varchar(40) NOT NULL,
+  `lname` varchar(40) NOT NULL,
+  `phone` int(11) DEFAULT NULL,
+  `cell` int(11) DEFAULT NULL,
+  `email` varchar(100) NOT NULL,
+  `city` varchar(40) NOT NULL,
+  `state` varchar(40) NOT NULL,
+  `zip` int(11) DEFAULT NULL,
+  `isgold` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`client_id`),
+  UNIQUE KEY `userid_UNIQUE` (`userid`)
+)
+
+Drop Query: drop table client;
+________________________________________________________________________________
+
+2.Trader Table:
+CREATE TABLE `trader` (
+  `trader_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  PRIMARY KEY (`trader_id`)
+) 
+
+Drop Query: drop table trader;
+_______________________________________________________________________________
+
+3.Manager Table
+CREATE TABLE `manager` (
+  `mgr_id` int(11) NOT NULL AUTO_INCREMENT,
+  `userid` varchar(40) NOT NULL,
+  `password` varchar(40) NOT NULL,
+  PRIMARY KEY (`mgr_id`)
+)
+
+Drop Query: drop table manager; 
+
+________________________________________________________________________________
+
+4.Oil_transaction table
+CREATE TABLE `oil_transaction` (
+  `trans_id` int(11) NOT NULL AUTO_INCREMENT,
+  `clientid` int(11) DEFAULT NULL,
+  `trans_type` varchar(10) DEFAULT NULL,
+  `oil_amount_ltr` float DEFAULT NULL,
+  `amt_due` float DEFAULT NULL,
+  `trans_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `Payment` varchar(45) DEFAULT 'Pending',
+  `com_incash` float DEFAULT NULL,
+  `com_inoil` float DEFAULT NULL,
+  PRIMARY KEY (`trans_id`),
+  KEY `clientid` (`clientid`),
+  CONSTRAINT `oil_transaction_ibfk_1` FOREIGN KEY (`clientid`) REFERENCES `client` (`client_id`)
+) 
+
+Drop Query: drop table oil_transaction;
+________________________________________________________________________________
+
+5. Oil_price Table
+CREATE TABLE `oil_price` (
+  `price_per_ltr` float DEFAULT NULL
+)
+
+Drop Query: drop table oil_price;
